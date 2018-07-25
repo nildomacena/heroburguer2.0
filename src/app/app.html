@@ -1,1 +1,62 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+    <ion-content>
+      <div *ngIf="!fire.user" >
+        <h5 color="primary" text-center>Faça o login para aproveitar todas as promoções!</h5>
+        <ion-grid>
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col>
+              <button ion-button menuClose (click)="login()" class="facebook-button" color="fb-color" full ><ion-icon name="logo-facebook"></ion-icon>&nbsp;&nbsp;Login com Facebook</button>
+            </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>
+        <hr>
+      </div>
+      <div *ngIf="fire.user" class="logado" >
+        <ion-grid align-items-center>
+          <ion-row>
+            <ion-col col-4 align-self-center>
+              <img [src]="fire.user.providerData[0].photoURL" alt="" class="avatar" >
+            </ion-col>
+            <ion-col col-8 align-self-center>
+              <p color="fb-color" class="nome-login" (click)="login()" >{{fire.user.displayName}}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid> 
+      </div>
+      <ion-list>
+        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+          <ion-icon name="paper"></ion-icon> {{p.title}}
+        </button>
+        <button menuClose ion-item (click)="openLocalizacao()">
+          <ion-icon name="map"></ion-icon> Nos Encontre
+        </button>
+        <button menuClose ion-item (click)="openFotos()">
+          <ion-icon name="images"></ion-icon> Fotos da Galera
+        </button>
+        <button menuClose ion-item (click)="openCarrinho()" *ngIf="fire.user">
+          <ion-icon name="cart"></ion-icon> Carrinho
+        </button>
+        <button menuClose ion-item (click)="openInfo()" *ngIf="fire.user">
+          <ion-icon name="contact"></ion-icon> Meus Dados
+        </button>
+      </ion-list>
+    </ion-content>
+    <ion-footer *ngIf="fire.user" >
+      <ion-grid no-margin no-padding>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col></ion-col>
+          <ion-col>
+            <p menuClose text-center class="botao-sair" (click)="logout()" >
+              Sair
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-footer>
+  </ion-menu>
+  
+  <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+  <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

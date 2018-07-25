@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Carrinho</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="vazio" *ngIf="carrinho.itens.length == 0">
+    <h4>Você ainda não adicionou itens ao carrinho. Não perca tempo, faça já seu pedido.</h4>
+    <button ion-button primary style="width: 100%" (click)="goBack()" >
+        Visualizar ofertas
+    </button>
+  </div>
+  <ion-list *ngIf="carrinho">
+    <ion-item *ngFor="let item of carrinho.itens" >
+      <ion-thumbnail item-left>
+        <img [src]="item.menuItem.thumbnail" *ngIf="item.menuItem.thumbnail"  class="imagem-lanche">
+        <ion-img *ngIf="!item.menuItem.linkImagem" src="assets/img/no-photo.jpg" class="imagem-lanche"></ion-img>
+      </ion-thumbnail>
+      <h2>{{item.menuItem.titulo}}</h2>
+      <p>Preço unitário: {{item?.menuItem.preco | currency:'BRL':true}}</p>
+      <p>Quantidade: {{item?.quantidade}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  
+    <ion-grid no-margin no-padding padding-left>
+      <ion-row align-items-center>
+        <ion-col col-8 align-self-center>
+          <p class="valor_carrinho">Valor total: {{carrinho.valor_total | currency:'BRL':true}}</p>
+        </ion-col>
+        <ion-col col-4 align-self-center><button id="botao-esquerdo" (click)="goToFecharPedido()" outline no-margin ion-button icon-start>Continuar</button></ion-col>
+      </ion-row>
+    </ion-grid>
+  
+</ion-footer>

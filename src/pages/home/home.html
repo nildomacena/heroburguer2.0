@@ -1,14 +1,18 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Cardápio</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
-</ion-content>
+<ion-fab bottom right >
+  <button ion-fab (click)="ligar()" ><ion-icon name="call"></ion-icon></button>
+</ion-fab>
+<super-tabs tabsPlacement="bottom" indicatorColor="white" toolbarColor="white" [config]="{ sideMenu: 'left' }">
+  <super-tab [root]="page2" title="Sanduíches"></super-tab>
+  <super-tab [root]="page1" title="Combos"></super-tab>
+  <super-tab [root]="page3" title="Diversos"></super-tab>
+</super-tabs>
+

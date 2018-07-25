@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>tab3</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding>
+  <ion-list>
+    <ion-item-group *ngFor="let subItem of itensDiversos.subItens" >
+      <ion-item-divider color="light">{{subItem.titulo}}</ion-item-divider>
+      <ion-item *ngFor="let item of subItem.itens" >
+        <ion-thumbnail item-start>
+          <img [src]="item.imagem">
+        </ion-thumbnail>
+        <h2>{{item.titulo}}</h2>
+        <p>{{item.descricao}}</p>
+        <p>{{item.preco | currency:'BRL':true}}</p>
+      </ion-item>
+    </ion-item-group>
+  </ion-list>
+</ion-content>
