@@ -14,6 +14,7 @@ import { AngularFireAuthModule } from '../../node_modules/angularfire2/auth';
 import { ListPage } from './../pages/list/list';
 import { HomePage } from '../pages/home/home';
 import { ReactiveFormsModule } from '../../node_modules/@angular/forms';
+import { HttpModule } from '../../node_modules/@angular/http';
 
 //Providers
 import { FireProvider } from '../providers/fire/fire';
@@ -29,7 +30,8 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { CallNumber } from '@ionic-native/call-number'
 import { GoogleMaps } from "@ionic-native/google-maps";
-import { HttpModule } from '../../node_modules/@angular/http';
+import { FCM } from "@ionic-native/fcm";
+
 
 const config = {
       apiKey: "AIzaSyBicF0oeyGcCQ5sr8QvNsjg6qphf0Dmjio",
@@ -71,6 +73,7 @@ providers: [
   ScreenOrientation,
   CallNumber,
   Firebase,
+  FCM,
   FireProvider,
   Facebook,
   Sim

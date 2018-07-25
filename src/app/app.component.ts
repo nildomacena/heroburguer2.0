@@ -1,3 +1,4 @@
+import { Firebase } from '@ionic-native/firebase';
 import { Sim } from '@ionic-native/sim';
 import { FireProvider } from './../providers/fire/fire';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
@@ -28,6 +29,7 @@ export class MyApp {
     public headerColor: HeaderColor, 
     public screenOrientation: ScreenOrientation,
     public sim: Sim,
+    public firebaseNativo: Firebase,
     public fire: FireProvider
   ) {
     this.initializeApp();
@@ -49,7 +51,7 @@ export class MyApp {
         this.headerColor.tint('#e65100');      
         this.statusBar.styleDefault();
         this.splashScreen.hide();
-
+        this.firebaseNativo.subscribe('teste');
         this.fire.ouvirNotificacoes()
           .subscribe(notificacao => {
             console.log(notificacao);
