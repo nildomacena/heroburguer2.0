@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ImageLoader } from 'ionic-image-loader';
+import { HttpClient } from '@angular/common/http';
 
-/**
- * Generated class for the TestecachePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage({
   name: 'testecache',
@@ -17,12 +13,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'testecache.html',
 })
 export class TestecachePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  users = [];
+  jsonData = null;
+ 
+  constructor(public navCtrl: NavController, private htppClient: HttpClient, private imageLoader: ImageLoader) { }
+ 
+  loadData() {
+    if (!this.jsonData) {
+      this.htppClient.get('https://randomuser.me/api/?results=100').subscribe(res => {
+        this.users = res['results'];
+        this.jsonData = res['results'];
+      });
+    } else {
+      this.users = [];
+      setTimeout(() => {
+        this.users = this.jsonData; 
+      }, 1000);
+    }
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad TestecachePage');
+ 
+  clearCache(refresher) {
+    this.imageLoader.clearCache();
+    refresher.complete();
   }
-
+ 
+  onImageLoad(event) {
+    console.log('image ready: ', event);
+  }
 }

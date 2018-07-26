@@ -1,4 +1,4 @@
-import { CacheImgModule } from './../../global/img-cache/img-cache.module';
+import { IonicImageLoader } from 'ionic-image-loader';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { TestecachePage } from './testecache';
@@ -9,7 +9,7 @@ import { TestecachePage } from './testecache';
   ],
   imports: [
     IonicPageModule.forChild(TestecachePage),
-    CacheImgModule
+    IonicImageLoader.forRoot()
   ],
 })
 export class TestecachePageModule {}

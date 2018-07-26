@@ -8,9 +8,7 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
-import { ImgCacheService } from '../global';
+import { ImageLoaderConfig } from '../../node_modules/ionic-image-loader';
 
 @Component({
   templateUrl: 'app.html'
@@ -30,7 +28,7 @@ export class MyApp {
     public headerColor: HeaderColor, 
     public screenOrientation: ScreenOrientation,
     public sim: Sim,
-    public imgCacheService:ImgCacheService,
+    public imageLoaderConfig: ImageLoaderConfig,
     public firebaseNativo: Firebase,
     public fire: FireProvider
   ) {
@@ -47,8 +45,9 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       console.log(`É cordova? ${this.platform.is('cordova')}`);
-      this.imgCacheService.initImgCache()
-        .subscribe((v) => console.log('init'), () => console.log('fail init'));
+      this.imageLoaderConfig.setImageReturnType('base64');
+      this.imageLoaderConfig.enableDebugMode();
+
       if(this.platform.is('cordova')){
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);      
         this.headerColor.tint('#e65100');      

@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { HttpModule } from '../../node_modules/@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicImageLoader } from 'ionic-image-loader';
 
 import { MyApp } from './app.component';
 import { SuperTabsController,SuperTabsModule } from 'ionic2-super-tabs';
@@ -11,10 +14,7 @@ import { AngularFireDatabaseModule } from '../../node_modules/angularfire2/datab
 import { AngularFireAuthModule } from '../../node_modules/angularfire2/auth';
 
 //Pages
-import { ListPage } from './../pages/list/list';
-import { HomePage } from '../pages/home/home';
 import { ReactiveFormsModule } from '../../node_modules/@angular/forms';
-import { HttpModule } from '../../node_modules/@angular/http';
 
 //Providers
 import { FireProvider } from '../providers/fire/fire';
@@ -30,7 +30,6 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { CallNumber } from '@ionic-native/call-number'
 import { GoogleMaps } from "@ionic-native/google-maps";
-import { ImgCacheService, CacheImgModule } from '../global';
 import { File } from '@ionic-native/file';
 
 
@@ -45,24 +44,23 @@ const config = {
 
 @NgModule({
 declarations: [
-  MyApp,
-  ListPage
+  MyApp
 ],
 imports: [
   BrowserModule,
   SuperTabsModule.forRoot(),
   IonicModule.forRoot(MyApp),
   AngularFireModule.initializeApp(config),
-  CacheImgModule.forRoot(),
   AngularFireDatabaseModule,
   AngularFireAuthModule,
   ReactiveFormsModule,
   HttpModule,
+  HttpClientModule,
+  IonicImageLoader.forRoot()
 ],
 bootstrap: [IonicApp],
 entryComponents: [
-  MyApp,
-  ListPage
+  MyApp
 ],
 providers: [
   File,
@@ -79,7 +77,6 @@ providers: [
   FireProvider,
   Facebook,
   Sim,
-  ImgCacheService
 ]
 })
 export class AppModule {}

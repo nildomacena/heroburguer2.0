@@ -10,7 +10,8 @@
 <ion-content no-padding>
   <div class="card-background">
     <ion-card *ngFor="let sanduiche of sanduiches" (click)="goToSanduiche(sanduiche)" >
-      <img [src]="sanduiche.linkImagem"/>
+      <img-loader [src]="sanduiche?.imagem" useImg (load)="onImageLoad($event)"></img-loader>
+      <!--<img [src]="sanduiche.imagem"/>-->
       <div class="card-title">{{sanduiche.titulo}}</div>
       <div class="card-subtitle">{{sanduiche.preco | currency:'BRL':true}}<br>{{sanduiche.descricao}}</div>
     </ion-card>

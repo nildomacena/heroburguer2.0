@@ -1,3 +1,4 @@
+import { IonicImageLoader } from 'ionic-image-loader';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Tab2Page } from './tab2';
@@ -8,6 +9,8 @@ import { Tab2Page } from './tab2';
   ],
   imports: [
     IonicPageModule.forChild(Tab2Page),
+    IonicImageLoader.forRoot()
+
   ],
 })
 export class Tab2PageModule {}
