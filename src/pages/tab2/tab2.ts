@@ -21,7 +21,7 @@ export class Tab2Page {
   ) {
     console.log(this.platfom.is('cordova'));
     this.sanduiches = [
-      {titulo: "Flash", preco: 9, descricao: "Hambúrguer, queijo, presunto, ovo e alface", imagem: "https://firebasestorage.googleapis.com/v0/b/hero-burguer.appspot.com/o/imgs%2Fsanduiches%2Fflash.jpg?alt=media&token=6dcb2896-9e72-4073-8ac4-11f07832a933", thumbnail: 'https://firebasestorage.googleapis.com/v0/b/hero-burguer.appspot.com/o/imgs%2Fsanduiches%2Fflash-thumbnail.jpg?alt=media&token=b3a51536-14f8-4f88-8cbe-6a0f7fc26a6b'},
+      {titulo: "Flash", preco: 9, descricao: "Hambúrguer, queijo, presunto, ovo e alface", imagem: "http://www.deviante.com.br/wp-content/uploads/2016/02/deadpool-001.jpg", thumbnail: 'http://www.deviante.com.br/wp-content/uploads/2016/02/deadpool-001.jpg'},
       {titulo: "Deadpool", preco: 9.5, descricao: "Hambúrguer, bacon, queijo, presunto e salada", imagem: "assets/img/sanduiches/deadpool.jpg", thumbnail: 'assets/img/sanduiches/deadpool-thumbnail.jpg'},
       {titulo: "Supegirl", preco: 9.5, descricao: "Cheddar, frango, queijo, presunto, bacon e salada", imagem: "assets/img/sanduiches/supergirl.jpg", thumbnail: 'assets/img/sanduiches/supergirl-thumbnail.jpg'},
       {titulo: "Capitão América", preco: 8, descricao: "Queijo, presunto, ovo e salada", imagem: "assets/img/sanduiches/capitao-america.jpg", thumbnail: 'assets/img/sanduiches/capitao-americva-thumbnail.jpg'},
