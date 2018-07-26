@@ -30,7 +30,8 @@ import { HeaderColor } from '@ionic-native/header-color';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { CallNumber } from '@ionic-native/call-number'
 import { GoogleMaps } from "@ionic-native/google-maps";
-import { FCM } from "@ionic-native/fcm";
+import { ImgCacheService, CacheImgModule } from '../global';
+import { File } from '@ionic-native/file';
 
 
 const config = {
@@ -52,6 +53,7 @@ imports: [
   SuperTabsModule.forRoot(),
   IonicModule.forRoot(MyApp),
   AngularFireModule.initializeApp(config),
+  CacheImgModule.forRoot(),
   AngularFireDatabaseModule,
   AngularFireAuthModule,
   ReactiveFormsModule,
@@ -63,6 +65,7 @@ entryComponents: [
   ListPage
 ],
 providers: [
+  File,
   StatusBar,
   SplashScreen,
   SuperTabsController,
@@ -73,10 +76,10 @@ providers: [
   ScreenOrientation,
   CallNumber,
   Firebase,
-  FCM,
   FireProvider,
   Facebook,
-  Sim
+  Sim,
+  ImgCacheService
 ]
 })
 export class AppModule {}

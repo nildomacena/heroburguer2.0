@@ -1,4 +1,3 @@
-import { FCM } from '@ionic-native/fcm';
 import { Firebase } from '@ionic-native/firebase';
 import { Platform , Events} from 'ionic-angular';
 import { Injectable } from '@angular/core';
@@ -23,7 +22,6 @@ export class FireProvider {
     public fb: Facebook, 
     public events: Events,
     public firebaseNative: Firebase,
-    public fcm: FCM
   ) {
     this.carrinho = {
       valor_total: 0,

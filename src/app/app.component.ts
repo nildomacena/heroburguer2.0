@@ -10,6 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { ImgCacheService } from '../global';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,6 +30,7 @@ export class MyApp {
     public headerColor: HeaderColor, 
     public screenOrientation: ScreenOrientation,
     public sim: Sim,
+    public imgCacheService:ImgCacheService,
     public firebaseNativo: Firebase,
     public fire: FireProvider
   ) {
@@ -45,7 +47,8 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       console.log(`É cordova? ${this.platform.is('cordova')}`);
-
+      this.imgCacheService.initImgCache()
+        .subscribe((v) => console.log('init'), () => console.log('fail init'));
       if(this.platform.is('cordova')){
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);      
         this.headerColor.tint('#e65100');      
@@ -56,7 +59,7 @@ export class MyApp {
           .subscribe(notificacao => {
             console.log(notificacao);
             alert(`Atenção! ${notificacao.mensagem}`);
-            this.nav.push('promocao')
+            this.nav.push('testecache')
           })
         this.sim.getSimInfo()
         .then(info => { 
@@ -79,7 +82,7 @@ export class MyApp {
     this.nav.push('CarrinhoPage');
   }
   openFotos(){
-    this.nav.push('FotosPage');
+    this.nav.push('testecache');
   }
 
   openInfo(){
