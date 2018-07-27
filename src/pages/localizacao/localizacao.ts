@@ -8,8 +8,8 @@ import {
   CameraPosition,
   MarkerOptions,
  } from '@ionic-native/google-maps';
- 
-declare var google: any;
+  
+
 
 @IonicPage()
 @Component({
@@ -29,12 +29,15 @@ export class LocalizacaoPage {
     console.log('ionViewDidLoad LocalizacaoPage');
     this.mapElement = document.getElementById('map');
 
-    if(!this.mapLoaded)
-      this.loadMapJavascript();
+    if(!this.mapLoaded){
+      setTimeout(() => {
+        this.loadMapJavascript();
+      }, 1000);
+    }
+
   }
 
   loadMap() {
-    
     console.log('loadMap', document.getElementById('map'));
     let mapOptions: GoogleMapOptions = {
       camera: {
@@ -73,7 +76,6 @@ export class LocalizacaoPage {
     let mapOptions: google.maps.MapOptions = {
       center: latLng,
       zoom: 16,
-      fullscreenControl: false,
       streetViewControl: false,
       panControl: false,
       clickableIcons:false,
