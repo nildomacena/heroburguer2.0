@@ -47,7 +47,7 @@ export class MyApp {
       console.log(`É cordova? ${this.platform.is('cordova')}`);
       this.imageLoaderConfig.setImageReturnType('base64');
       this.imageLoaderConfig.enableDebugMode();
-
+      this.imageLoaderConfig.setFallbackUrl('./assets/img/no-photo.jpg');
       if(this.platform.is('cordova')){
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);      
         this.headerColor.tint('#e65100');      
