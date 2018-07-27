@@ -1,11 +1,14 @@
+import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
 import { Firebase } from '@ionic-native/firebase';
 import { Platform , Events} from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 
 import { Facebook } from '@ionic-native/facebook';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 import * as firebase from 'firebase/app';
 
@@ -22,6 +25,7 @@ export class FireProvider {
     public fb: Facebook, 
     public events: Events,
     public firebaseNative: Firebase,
+    public afs:AngularFirestore
   ) {
     this.carrinho = {
       valor_total: 0,
@@ -82,7 +86,26 @@ export class FireProvider {
     }
     
   }
+
   
+  snapshotParaValue(lista){
+    let novaLista = [];
+    lista.map(objeto => {
+      let novoObjeto = {};
+      novoObjeto['key'] = objeto.payload.doc.id;
+      let val = objeto.payload.doc.data();
+      Object.keys(val).map(key => {
+        novoObjeto[key] = val[key]
+      });
+      novaLista.push(novoObjeto);
+    });
+    return novaLista;
+  }
+
+  getSanduiches():Observable<any>{
+    return this.afs.collection('sanduiches').snapshotChanges();
+  }
+
   atualizaValorTotal(){
     this.carrinho.valor_total = 0;
     this.carrinho.quantidadeItens = 0;

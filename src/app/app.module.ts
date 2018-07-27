@@ -9,9 +9,10 @@ import { MyApp } from './app.component';
 import { SuperTabsController,SuperTabsModule } from 'ionic2-super-tabs';
 
 //Angularfire
-import { AngularFireModule } from '../../node_modules/angularfire2';
-import { AngularFireDatabaseModule } from '../../node_modules/angularfire2/database';
-import { AngularFireAuthModule } from '../../node_modules/angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 //Pages
 import { ReactiveFormsModule } from '../../node_modules/@angular/forms';
@@ -52,6 +53,7 @@ imports: [
   IonicModule.forRoot(MyApp),
   AngularFireModule.initializeApp(config),
   AngularFireDatabaseModule,
+  AngularFirestoreModule,
   AngularFireAuthModule,
   ReactiveFormsModule,
   HttpModule,

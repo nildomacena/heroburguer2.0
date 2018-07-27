@@ -1,6 +1,7 @@
+import { FireProvider } from './../../providers/fire/fire';
 import { UtilProvider } from './../../providers/util/util';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Platform, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Platform, App, Loading, LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -9,22 +10,32 @@ import { IonicPage, NavController, NavParams, ModalController, Platform, App } f
 })
 export class Tab2Page {
 
-  sanduiches: any[];
-
+  sanduiches: any[] = [];
+  loading: Loading
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public modalCtrl: ModalController, 
     public platfom: Platform,
     public util: UtilProvider,
-    public app: App
+    public app: App,
+    public fire: FireProvider,
+    public loadingCtrl: LoadingController
   ) {
-    console.log(this.platfom.is('cordova'));
-    this.sanduiches = [
-      {titulo: "Flash", preco: 9, descricao: "Hambúrguer, queijo, presunto, ovo e alface", imagem: "http://www.deviante.com.br/wp-content/uploads/2016/02/deadpool-001.jpg", thumbnail: 'http://www.deviante.com.br/wp-content/uploads/2016/02/deadpool-001.jpg'},
+
+    this.fire.getSanduiches()
+      .subscribe(sanduiches => {
+        console.log(this.fire.snapshotParaValue(sanduiches));
+        this.sanduiches = this.fire.snapshotParaValue(sanduiches);
+        if(this.sanduiches.length > 0)
+          this.loading.dismiss();
+      })
+
+    /*this.sanduiches = [
+      {titulo: "Flash", preco: 9, descricao: "Hambúrguer, queijo, presunto, ovo e alface", imagem: "https://firebasestorage.googleapis.com/v0/b/hero-burguer.appspot.com/o/imgs%2Fsanduiches%2Fflash.jpg?alt=media&token=6dcb2896-9e72-4073-8ac4-11f07832a933", thumbnail: 'http://www.deviante.com.br/wp-content/uploads/2016/02/deadpool-001.jpg'},
       {titulo: "Deadpool", preco: 9.5, descricao: "Hambúrguer, bacon, queijo, presunto e salada", imagem: "assets/img/sanduiches/deadpool.jpg", thumbnail: 'assets/img/sanduiches/deadpool-thumbnail.jpg'},
-      {titulo: "Supegirl", preco: 9.5, descricao: "Cheddar, frango, queijo, presunto, bacon e salada", imagem: "assets/img/sanduiches/supergirl.jpg", thumbnail: 'assets/img/sanduiches/supergirl-thumbnail.jpg'},
-      {titulo: "Capitão América", preco: 8, descricao: "Queijo, presunto, ovo e salada", imagem: "assets/img/sanduiches/capitao-america.jpg", thumbnail: 'assets/img/sanduiches/capitao-americva-thumbnail.jpg'},
+      {titulo: "Supegirl", preco: 9.5, descricao: "Cheddar, frango, queijo, presunto, bacon e salada", imagem: "http://cdn.warnerestrenos.com/res/series/supergirl2017/header/header_minisite_big.jpg", thumbnail: 'http://cdn.warnerestrenos.com/res/series/supergirl2017/header/header_minisite_big.jpg'},
+      {titulo: "Capitão América", preco: 8, descricao: "Queijo, presunto, ovo e salada", imagem: "https://firebasestorage.googleapis.com/v0/b/hero-burguer.appspot.com/o/imgs%2Fsanduiches%2Fcapitao-america.jpg?alt=media&token=9b9f55ac-e502-4ae6-abdf-6d3deca50b15", thumbnail: 'https://firebasestorage.googleapis.com/v0/b/hero-burguer.appspot.com/o/imgs%2Fsanduiches%2Fcapitao-america-thumbnail.jpg?alt=media&token=6ba07bdc-d1b8-420f-89e9-d2e104b73bdb'},
       {titulo: "Viúva Negra", preco: 12.5, descricao: "Filé de frango, Presunto, queijo, bacon, ovo e salada", imagem: "assets/img/sanduiches/viuva-negra.jpg", thumbnail: 'assets/img/sanduiches/viuva-negra-thumbnail.jpg'},
       {titulo: "Mulher Maravilha", preco: 12.5, descricao: "Filé de alcatra, Presunto, queijo, bacon, ovo e salada", imagem: "assets/img/sanduiches/mulher-maravilha.jpg", thumbnail: 'assets/img/sanduiches/mulher-maravilha-thumbnail.jpg'},
       {titulo: "Super Homem", preco: 12.5, descricao: "Filé de alcatra, filé de frango, Presunto, queijo, bacon, ovo e salada", imagem: "assets/img/sanduiches/superman.jpg", thumbnail: 'assets/img/sanduiches/superman-thumbnail.jpg'},
@@ -44,7 +55,10 @@ export class Tab2Page {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Tab2Page');
+    this.loading = this.loadingCtrl.create({
+      content: 'Carregando...'
+    })
+    this.loading.present();
   }
 
   goToSanduiche(sanduiche){
